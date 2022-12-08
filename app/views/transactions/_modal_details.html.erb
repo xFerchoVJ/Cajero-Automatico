@@ -21,16 +21,20 @@
         </div>
         <div class="row d-none" id="details-body">
           <div class="col-6">
-            <p>Cantidad retirada:</p>
+            <p class="fw-bold">Cantidad retirada:</p>
             <p>$<%=current_user.transactions.last.requested_money%></p>
           </div>
           <div class="col-6">
-            <p>Saldo disponible</p>
+            <p class="fw-bold">Saldo disponible</p>
             <p>$<%=current_user.balance%></p>
           </div>
           <div class="col-12">
-            <p>Hora y fecha de la transacción</p>
+            <p class="fw-bold">Hora y fecha de la transacción</p>
             <p><%=current_user.transactions.last.created_at.to_date%> <span><%=Time.now.strftime('%H:%M')%></span></p>
+          </div>
+          <div class="col-12">
+            <p class="m-0 fw-bold">Billetes entregados</p>
+            <p class="m-0"><%= delivered_money(current_user.transactions.last.requested_money, [500, 200, 100, 50])%></p>
           </div>
         </div>
       </div>

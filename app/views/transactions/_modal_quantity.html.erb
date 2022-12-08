@@ -1,17 +1,60 @@
-<div class="modal fade" id="another_quantity" tabindex="-1" aria-labelledby="another_quantity" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="another_quantity">Ingrese la cantidad deseada</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+<div class="modal fade modal-quantity" id="another_quantity" tabindex="-1" aria-labelledby="another_quantity" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="another_quantity">Ingrese la cantidad deseada</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form.label :requested_money, 'Ingrese la cantidad a retirar', class: "form-label"%></br>
+          <%= form.number_field :requested_money, class: "form-control", placeholder: "Ej: 2500", id: 'number-field'%>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <%= form.submit 'Retirar', class: "btn btn-outline-primary", id: "button-number"%>
+        </div>
       </div>
     </div>
-  </div>
 </div>
+
+<script>
+  var numberField = document.querySelector("#number-field");
+  var modalContainer = document.querySelector(".modal-body");
+  var buttonSubmit = document.querySelector("#button-number");
+
+  numberField.addEventListener('blur', function () {
+    if (numberField.value === "" || parseInt(numberField.value) % 50 !== 0) {
+      var alert = document.querySelectorAll(".alert-danger");
+      if (alert.length == 1) {
+        alert[0].remove();
+      }
+      createAlert(modalContainer, "No puedes retirar billetes que no sean de 50, 100, 200 o 500")
+      buttonSubmit.disabled = true;
+      return;
+    }else if(parseInt(numberField.value) > 6000){
+      var alert = document.querySelectorAll(".alert-danger");
+      if (alert.length == 1) {
+        alert[0].remove();
+      }
+      createAlert(modalContainer, "No se permite retirar cantidades mayores a 6000")
+      buttonSubmit.disabled = true;
+      return;
+    }
+    else{
+      var alert = document.querySelector(".alert-danger");
+      alert.remove();
+      buttonSubmit.disabled = false;
+    }
+  })
+
+  function createAlert(modal, msg){
+    var div = document.createElement('div')
+    var text = document.createElement('p');
+    text.textContent = msg;
+    div.classList.add("alert");
+    div.classList.add("alert-danger")
+    div.classList.add("mt-3")
+    div.appendChild(text);
+    modal.append(div);
+  }
+</script>
