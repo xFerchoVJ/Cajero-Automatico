@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, password_length: 3..4
 
   validates :card_digits, presence: true, length: {maximum: 16}
-  validates :password, presence: true, length: {minimum: 4, maximum: 4}
-  
+  validates_length_of :balance, :maximum => 50000, :message => "Saldo sobresaliente en la cuenta..."
+  has_many :transactions
   #Use this method to change de auth way
   def email_required?
     false

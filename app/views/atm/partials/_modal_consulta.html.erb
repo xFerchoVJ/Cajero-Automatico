@@ -1,0 +1,19 @@
+<div class="modal fade" id="modal_consulta_saldo" tabindex="-1" aria-labelledby="modal_consulta_saldo" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modal_consulta_saldo">CONSULTA DE SALDO</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h2>Dinero en la cuenta</h2>
+        <p class="text-decoration-underline fs-4">
+          $<%= current_user.balance %> MXN
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

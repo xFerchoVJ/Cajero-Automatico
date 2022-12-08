@@ -1,0 +1,50 @@
+<div class="modal fade" id="detail_transaction_modal" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">Transaccion realizada</h2>
+        <%= link_to destroy_user_session_path, data:{ "turbo-method": :delete } do %>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <% end %>
+      </div>
+      <div class="modal-body">
+        <div class="row" id="request-detail">
+          <div class="col-12">
+            <h3>¿Desea imprimir el reporte de la transacción?</h3>
+          </div>
+          <div class="col-6">
+            <p class="btn btn-primary w-100" id="accept-details">Sí</p>
+          </div>
+          <div class="col-6">
+            <%= link_to "No",destroy_user_session_path, data:{ "turbo-method": :delete }, class: "btn btn-warning w-100"%>
+          </div>
+        </div>
+        <div class="row d-none" id="details-body">
+          <div class="col-6">
+            <p>Cantidad retirada:</p>
+            <p>$<%=current_user.transactions.last.requested_money%></p>
+          </div>
+          <div class="col-6">
+            <p>Saldo disponible</p>
+            <p>$<%=current_user.balance%></p>
+          </div>
+          <div class="col-12">
+            <p>Hora y fecha de la transacción</p>
+            <p><%=current_user.transactions.last.created_at.to_date%> <span><%=Time.now.strftime('%H:%M')%></span></p>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+</div>
+
+<script>
+  var buttonDetails = document.querySelector("#accept-details");
+  var divDetails = document.querySelector("#details-body");
+  var divRequest = document.querySelector("#request-detail");
+  buttonDetails.addEventListener("click", function (e) {
+    e.preventDefault();
+    divDetails.classList.remove("d-none");
+    divRequest.classList.add("d-none");
+  })
+</script>

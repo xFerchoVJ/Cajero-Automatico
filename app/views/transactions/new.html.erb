@@ -1,0 +1,19 @@
+<div class="container mt-5 p-3 bg-light">
+  <div class="row text-center">
+    <div class="col-6">
+      <h1>RETIRAR EFECTIVO</h1>
+    </div>
+    <div class="col-6">
+      <h2 class="m-0">Dinero disponible en cajero: <%=@atm_money%></h2>
+    </div>
+  </div>
+  <h2 class="text-center">Balance en la cuenta: $<%=current_user.balance%></h2>
+  <%= render "form", transaction: @transaction %>
+  <% flash.each do |name, msg| %>
+    <%= render 'transactions/modal_details' %>
+  <% end %>
+</div>
+
+<script>
+  $("#detail_transaction_modal").modal('show')
+</script>

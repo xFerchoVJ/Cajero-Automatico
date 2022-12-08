@@ -1,0 +1,19 @@
+<div class="modal fade" id="modal_error" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">Error</h2>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-6">
+            <p>No es posible realizar la transacción</p>
+          </div>
+          <div class="col-6">
+            <%= link_to "Aceptar",destroy_user_session_path, data:{ "turbo-method": :delete }, class: "btn btn-warning w-100"%>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+</div>

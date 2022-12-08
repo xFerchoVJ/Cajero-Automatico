@@ -1,0 +1,9 @@
+<div class="alert alert-warning" role="alert" id="alert_warning">
+  <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+  <ul>
+    <% transaction.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+    <% end %>
+  </ul>
+</div>

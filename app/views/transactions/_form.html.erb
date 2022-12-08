@@ -1,0 +1,41 @@
+<%= form_with(model: transaction, html: {id: "form_transactions"}, remote: true) do |form| %>
+  <% if transaction.errors.any? %>
+    <%= render 'transactions/alert' %>
+  <% end %>
+  <div class="row">
+    <% @possible_cash.each_with_index do |money, index| %>
+      <% if !@no_money_balance %>
+        <div class="btn-group col-12 mb-3" role="group">
+          <%= form.radio_button :requested_money, money.to_i, class: "btn-check", id: "btnradio"+index.to_s%>
+          <label class="btn btn-outline-primary" for="btnradio<%=index%>"><%=money%></label>
+        </div>
+      <% else %>
+        <div class="btn-group col-12 mb-3" role="group">
+          <%= form.radio_button :requested_money, money.to_i, class: "btn-check", id: "btnradio"+index.to_s%>
+          <label class="btn btn-outline-primary disabled" for="btnradio<%=index%>"><%=money%></label>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <% if !@no_money_balance %>
+    <div class="d-flex justify-content-between">
+      <%= form.submit "Retirar", class: "btn btn-outline-primary", id: "sendSubmit"%>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#another_quantity">
+        Otra cantidad
+      </button>
+      <%= render 'transactions/modal_quantity' %>
+    </div>
+  <% else %>
+    <%= link_to "Salir", destroy_user_session_path, data:{ "turbo-method": :delete }, class: "btn btn-warning w-100"%>
+  <% end %>
+  
+<% end %>
+
+<script>
+  var alert = document.querySelector("#alert_warning")
+  if (alert) {
+    setTimeout(() => {
+      alert.classList.add("d-none")
+    }, 5000);
+  }
+</script>

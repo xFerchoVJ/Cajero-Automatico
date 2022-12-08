@@ -1,0 +1,18 @@
+<div class="container mt-5 p-3 bg-light rounded" id="center">
+  <h1 class="mb-3">Bienvenido: <span class="fs-4"><%= current_user.card_digits %></span></h1>
+  <h2 class="mb-3 text-center">¿Qué operación desea consultar?</h2>
+  <div class="row">
+    <div class="col-12 text-center mb-4">
+      <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="#modal_consulta_saldo">
+        CONSULTA TU SALDO
+      </button>
+    </div>
+    <div class="col-12 text-center mb-3">
+      <%= link_to "RETIRAR EFECTIVO", new_transaction_path, class: "btn btn-secondary w-100"%>
+    </div>
+    <div class="col-12 text-center">
+      <%= link_to "Salir", destroy_user_session_path, method: :delete,  class: "btn btn-primary w-100" %>
+    </div>
+  </div>
+  <%= render 'atm/partials/modal_consulta' %>
+</div>
