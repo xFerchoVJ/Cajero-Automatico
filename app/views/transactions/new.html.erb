@@ -10,7 +10,9 @@
   <h2 class="text-center">Balance en la cuenta: $<%=current_user.balance%></h2>
   <%= render "form", transaction: @transaction %>
   <% flash.each do |name, msg| %>
-    <%= render 'transactions/modal_details' %>
+    <% if !@no_money_balance %>
+      <%= render 'transactions/modal_details' %>
+    <% end %>
   <% end %>
 </div>
 

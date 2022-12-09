@@ -3,6 +3,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
+    return if @no_money_balance
     @possible_cash = [500, 200, 100, 50]
     @atm_money = TableAtm.find(1).money
     balance = @possible_cash.select { |n| n > current_user.balance }

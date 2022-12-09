@@ -1,7 +1,11 @@
 <%= form_with(model: transaction, html: {id: "form_transactions"}, remote: true) do |form| %>
-  <% if transaction.errors.any? %>
-    <%= render 'transactions/alert' %>
+  
+  <% if transaction %>
+    <% if transaction.errors.any? %>
+      <%= render 'transactions/alert' %>
+    <% end %>
   <% end %>
+  
   <div class="row">
     <% if !@no_money_balance && !@no_money %>
       <% @possible_cash.each_with_index do |money, index| %>
